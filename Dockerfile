@@ -33,6 +33,13 @@ RUN rm -rf /emacs25-25.2-1.el7.centos.x86_64.rpm
 RUN rm -rf /wqy-microhei-0.2.0-beta.tar.gz
 RUN rm -rf /wqy-microhei
 
+# 安装vscode
+ADD vscode /
+RUN bash -c 'rpm --import https://packages.microsoft.com/keys/microsoft.asc' \
+    && bash -c ' cat vscode > /etc/yum.repos.d/vscode.repo ' \
+    && yum install code -y 
+
+
 #设置用户与xfce桌面
 ADD entrypoint.sh /
 EXPOSE 3389 
